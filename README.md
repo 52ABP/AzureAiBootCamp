@@ -1,13 +1,12 @@
 
-
-[![GitHub stars](https://img.shields.io/github/stars/52ABP/LTMCompanyNameFree.YoyoCmsTemplate.svg)](https://github.com/52ABP/LTMCompanyNameFree.YoyoCmsTemplate/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/52ABP/LTMCompanyNameFree.YoyoCmsTemplate.svg?style=social)](https://github.com/52ABP/LTMCompanyNameFree.YoyoCmsTemplate/network)[![GitHub license](https://img.shields.io/github/license/52ABP/LTMCompanyNameFree.YoyoCmsTemplate.svg?style=social)](https://github.com/52ABP/LTMCompanyNameFree.YoyoCmsTemplate/blob/master/LICENSE)
-
+ 
 
 # 介绍
 
-> 各个镜像的编译状态
-> 考虑到国内的下载速度慢，我们在码云上也部署了一套环境，代码同步。
+AI训练营的Demo，感谢熊猫提供的DEMO文件，也感谢lulus 帮忙完善功能。
+
+参考： https://github.com/staneee/AzureCognitiveServicesExample
+
 
 # 课程推荐信息：
 
