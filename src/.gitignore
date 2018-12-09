@@ -7,3 +7,4 @@ bin/
 azureai-aspnet-core/src/Yoyo.AzureAi.Web.Host/App_Data/Logs/
 azureai-aspnet-core/src/Yoyo.AzureAi.Web.Mvc/App_Data/Logs/
 azureai-aspnet-core/src/Yoyo.AzureAi.Migrator/Logs/Logs.txt
+azureai-aspnet-core/src/Yoyo.AzureAi.Web.Host/appsettings.json

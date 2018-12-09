@@ -19,7 +19,7 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("/swagger");
+            return View();
         }
 
         /// <summary>

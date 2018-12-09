@@ -6,7 +6,7 @@
 AI训练营的Demo，感谢熊猫提供的DEMO文件，也感谢lulus 帮忙完善功能。
 
 参考： https://github.com/staneee/AzureCognitiveServicesExample
-
+可以参考操作手册.md
 
 # 课程推荐信息：
 
