@@ -34,6 +34,7 @@
     <ProjectReference Include="..\Yoyo.AzureAi.Web.Core\Yoyo.AzureAi.Web.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="3.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
@@ -60,5 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="wwwroot\libs\" />
   </ItemGroup>
 </Project>
