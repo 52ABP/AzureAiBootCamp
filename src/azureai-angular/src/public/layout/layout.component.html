@@ -1,0 +1,61 @@
+<div class="wrapper">
+
+  <!-- 顶部菜单栏 -->
+  <div class="head_content">
+    <div class="header">
+      <div class="top-nav-wrap">
+        <ul class="top-nav">
+          <li>
+            <div class="logo">
+              <img src="/assets/images/logos/logo-txt-white-shield.svg">
+            </div>
+
+          </li>
+          <li>
+            <a class="item" href="https://www.52abp.com" target="_blank">
+              <i class="anticon anticon-home"></i>
+              52ABP官网
+            </a>
+          </li>
+          <li>
+            <a class="item" href="https://www.52abp.com/wiki" target="_blank">
+              <i class="anticon anticon-book"></i>
+              文档
+            </a>
+          </li>
+          <li>
+            <a class="item" href="https://github.com/52ABP/AzureAiBootCamp" target="_blank">
+              <i class="anticon anticon-github"></i>
+              本项目源码
+            </a>
+          </li>
+          <li>
+            <a class="item" href="https://github.com/52ABP/LTMCompanyNameFree.YoyoCmsTemplate" target="_blank">
+              <i class="anticon anticon-github"></i>
+              52ABP源码
+            </a>
+          </li>
+          <li>
+            <a class="item" href="https://github.com/52ABP" target="_blank">
+              <i class="anticon anticon-exclamation-circle"></i>
+              更多...
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div nz-row>
+    <div nz-col [nzXs]="{ span: 22, offset: 1 }" [nzSm]="{span:18,offset:3}" [nzMd]="{span:16,offset:4}">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <nz-footer style="text-align: center; position: absolute;width: 100%;bottom: 0;">Azure AI Boot Camp - 成都站 ©2018 Power
+    By
+    <span>微软MVP / 微软云社区 / 微慕客 / </span>
+    <a href="https://www.52abp.com" target="_blank">52ABP</a>
+
+  </nz-footer>
+</div>

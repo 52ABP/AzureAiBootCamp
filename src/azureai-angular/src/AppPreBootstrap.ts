@@ -42,12 +42,13 @@ export class AppPreBootstrap {
         url: '/assets/appconfig.' + envName + '.json',
         method: 'GET',
         headers: {
-          'Abp.TenantId': abp.multiTenancy.getTenantIdCookie(),
+          'Abp.TenantId': (abp.multiTenancy.getTenantIdCookie() || ''),
         },
       })
       .done(result => {
-        AppConsts.appBaseUrl = result.appBaseUrl;
+        AppConsts.appBaseUrl = window.location.protocol + '//' + window.location.host;
         AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl;
+        AppConsts.uploadApiUrl = result.remoteServiceBaseUrl + result.uploadApiUrl;
         LocalizationService.localizationSourceName = AppConsts.localization.defaultLocalizationSourceName;
         callback();
       });
