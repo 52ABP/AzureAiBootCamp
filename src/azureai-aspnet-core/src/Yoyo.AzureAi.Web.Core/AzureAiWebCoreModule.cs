@@ -13,6 +13,7 @@ using Yoyo.AzureAi.Authentication.JwtBearer;
 using Yoyo.AzureAi.Configuration;
 using Yoyo.AzureAi.EntityFrameworkCore;
 using Abp.Configuration.Startup;
+using Newtonsoft.Json;
 
 namespace Yoyo.AzureAi
 {
@@ -20,17 +21,19 @@ namespace Yoyo.AzureAi
          typeof(AzureAiApplicationModule),
          typeof(AzureAiEntityFrameworkModule),
          typeof(AbpAspNetCoreModule)
-        ,typeof(AbpAspNetCoreSignalRModule)
+        , typeof(AbpAspNetCoreSignalRModule)
      )]
     public class AzureAiWebCoreModule : AbpModule
     {
         private readonly IHostingEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
+        private readonly IConfigurationRoot _azureConfiguration;
 
         public AzureAiWebCoreModule(IHostingEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();
+            _azureConfiguration = env.GetAzureConfiguration();
         }
 
         public override void PreInitialize()
@@ -55,6 +58,8 @@ namespace Yoyo.AzureAi
 
         private void ConfigureTokenAuth()
         {
+            #region TokenAuthConfiguration
+
             IocManager.Register<TokenAuthConfiguration>();
             var tokenAuthConfig = IocManager.Resolve<TokenAuthConfiguration>();
 
@@ -63,6 +68,16 @@ namespace Yoyo.AzureAi
             tokenAuthConfig.Audience = _appConfiguration["Authentication:JwtBearer:Audience"];
             tokenAuthConfig.SigningCredentials = new SigningCredentials(tokenAuthConfig.SecurityKey, SecurityAlgorithms.HmacSha256);
             tokenAuthConfig.Expiration = TimeSpan.FromDays(1);
+
+            #endregion
+
+
+            #region AzureConfiguration
+
+            IocManager.Register<AzureConfigs>();
+            var azureConfigs = IocManager.Resolve<AzureConfigs>();
+            azureConfigs = JsonConvert.DeserializeObject<AzureConfigs>(_azureConfiguration["AzureCognitiveServices"].ToString());
+            #endregion
         }
 
         public override void Initialize()

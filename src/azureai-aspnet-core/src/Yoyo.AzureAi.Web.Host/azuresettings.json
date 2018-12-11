@@ -1,0 +1,26 @@
+{
+  "AzureCognitiveServices": {
+    "ComputerVisionOCR": { // OCR
+      "ApiKey": "",
+      "Endpoint": ""
+    },
+    "ComputerVisionImgAnalyze": { // 图片场景分析
+      "ApiKey": "",
+      "Endpoint": ""
+    },
+    "SpeechToText": { // 语音转文本
+      "ApiKey": "",
+      "Endpoint": "",
+      "Region": "",
+      "Host": ""
+    },
+    "TextToSpeech": { // 文本转语音
+      "ApiKey": "",
+      "Endpoint": "",
+      "Region": "",
+      "Host": "",
+      "ResouceName": "",
+      "ContentTemplate": "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{0}'><voice name='Microsoft Server Speech Text to Speech Voice ({1})'>{2}</voice></speak>"
+    }
+  }
+}

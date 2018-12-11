@@ -18,7 +18,7 @@ namespace Yoyo.AzureAi.Migrator
         {
             abpProjectNameEntityFrameworkModule.SkipDbSeed = true;
 
-            _appConfiguration = AppConfigurations.Get(
+            _appConfiguration = AppConfigurations.GetAppsettings(
                 typeof(AzureAiMigratorModule).GetAssembly().GetDirectoryPathOrNull()
             );
         }

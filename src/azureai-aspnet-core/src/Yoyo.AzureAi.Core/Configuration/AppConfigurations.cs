@@ -14,24 +14,53 @@ namespace Yoyo.AzureAi.Configuration
             _configurationCache = new ConcurrentDictionary<string, IConfigurationRoot>();
         }
 
-        public static IConfigurationRoot Get(string path, string environmentName = null, bool addUserSecrets = false)
+        /// <summary>
+        /// 获取appsettings
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="environmentName"></param>
+        /// <param name="addUserSecrets"></param>
+        /// <returns></returns>
+        public static IConfigurationRoot GetAppsettings(string path, string environmentName = null, bool addUserSecrets = false)
         {
-            var cacheKey = path + "#" + environmentName + "#" + addUserSecrets;
+            string fileName = "appsettings";
+
+            var cacheKey = path + "#" + fileName + "#" + environmentName + "#" + addUserSecrets;
             return _configurationCache.GetOrAdd(
                 cacheKey,
-                _ => BuildConfiguration(path, environmentName, addUserSecrets)
+                _ => BuildConfiguration(path, fileName, environmentName, addUserSecrets)
             );
         }
 
-        private static IConfigurationRoot BuildConfiguration(string path, string environmentName = null, bool addUserSecrets = false)
+        /// <summary>
+        /// 获取azuresettings
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="environmentName"></param>
+        /// <param name="addUserSecrets"></param>
+        /// <returns></returns>
+        public static IConfigurationRoot GetAzuresettings(string path, string environmentName = null, bool addUserSecrets = false)
+        {
+            string fileName = "azuresettings";
+
+            var cacheKey = path + "#" + fileName + "#" + environmentName + "#" + addUserSecrets;
+            return _configurationCache.GetOrAdd(
+                cacheKey,
+                _ => BuildConfiguration(path, fileName, environmentName, addUserSecrets)
+            );
+        }
+
+
+
+        private static IConfigurationRoot BuildConfiguration(string path, string fileName, string environmentName = null, bool addUserSecrets = false)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(path)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                .AddJsonFile($"{fileName}.json", optional: true, reloadOnChange: true);
 
             if (!environmentName.IsNullOrWhiteSpace())
             {
-                builder = builder.AddJsonFile($"appsettings.{environmentName}.json", optional: true);
+                builder = builder.AddJsonFile($"{fileName}.{environmentName}.json", optional: true);
             }
 
             builder = builder.AddEnvironmentVariables();

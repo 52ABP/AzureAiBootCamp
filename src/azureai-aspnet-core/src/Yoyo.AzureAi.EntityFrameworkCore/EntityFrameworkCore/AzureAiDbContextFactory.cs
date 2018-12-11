@@ -12,7 +12,7 @@ namespace Yoyo.AzureAi.EntityFrameworkCore
         public AzureAiDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<AzureAiDbContext>();
-            var configuration = AppConfigurations.Get(WebContentDirectoryFinder.CalculateContentRootFolder());
+            var configuration = AppConfigurations.GetAppsettings(WebContentDirectoryFinder.CalculateContentRootFolder());
 
             AzureAiDbContextConfigurer.Configure(builder, configuration.GetConnectionString(AzureAiConsts.ConnectionStringName));
 

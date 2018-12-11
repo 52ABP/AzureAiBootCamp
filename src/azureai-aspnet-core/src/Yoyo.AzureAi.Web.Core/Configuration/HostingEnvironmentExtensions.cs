@@ -7,7 +7,12 @@ namespace Yoyo.AzureAi.Configuration
     {
         public static IConfigurationRoot GetAppConfiguration(this IHostingEnvironment env)
         {
-            return AppConfigurations.Get(env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
+            return AppConfigurations.GetAppsettings(env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
+        }
+
+        public static IConfigurationRoot GetAzureConfiguration(this IHostingEnvironment env)
+        {
+            return AppConfigurations.GetAzuresettings(env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
         }
     }
 }
