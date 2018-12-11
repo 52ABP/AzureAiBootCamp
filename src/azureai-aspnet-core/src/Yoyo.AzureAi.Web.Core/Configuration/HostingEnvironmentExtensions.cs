@@ -10,9 +10,9 @@ namespace Yoyo.AzureAi.Configuration
             return AppConfigurations.GetAppsettings(env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
         }
 
-        public static IConfigurationRoot GetAzureConfiguration(this IHostingEnvironment env)
+        public static string GetJsonFileContent(this IHostingEnvironment env, string fileNameWithOutEx)
         {
-            return AppConfigurations.GetAzuresettings(env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
+            return AppConfigurations.GetOtherConfigContent(env.ContentRootPath, fileNameWithOutEx, "json");
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Configuration;
 using Abp.Extensions;
 using Abp.Reflection.Extensions;
+using System.IO;
 
 namespace Yoyo.AzureAi.Configuration
 {
@@ -33,25 +34,36 @@ namespace Yoyo.AzureAi.Configuration
         }
 
         /// <summary>
-        /// 获取azuresettings
+        /// 获取其它配置文件的内容
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="environmentName"></param>
-        /// <param name="addUserSecrets"></param>
-        /// <returns></returns>
-        public static IConfigurationRoot GetAzuresettings(string path, string environmentName = null, bool addUserSecrets = false)
+        /// <param name="path">目录</param>
+        /// <param name="fileName">文件名</param>
+        /// <param name="ex">文件扩展名</param>
+        /// <param name="environmentName">环境变量</param>
+        /// <returns>读取到的结果</returns>
+        public static string GetOtherConfigContent(string path, string fileName, string ex = "json", string environmentName = null)
         {
-            string fileName = "azuresettings";
+            var configFilePath = string.Empty;
 
-            var cacheKey = path + "#" + fileName + "#" + environmentName + "#" + addUserSecrets;
-            return _configurationCache.GetOrAdd(
-                cacheKey,
-                _ => BuildConfiguration(path, fileName, environmentName, addUserSecrets)
-            );
+            if (!environmentName.IsNullOrWhiteSpace())
+            {
+                configFilePath = Path.Combine(path, $"{fileName}.{environmentName}.{ex}");
+            }
+            else
+            {
+                configFilePath = Path.Combine(path, $"{fileName}.{ex}");
+            }
+
+
+            if (!File.Exists(configFilePath))
+            {
+                throw new FileNotFoundException($"目录 {path} 中未找到文件 {path}.{ex}");
+            }
+
+
+            return File.ReadAllText(configFilePath, System.Text.Encoding.UTF8);
+
         }
-
-
-
         private static IConfigurationRoot BuildConfiguration(string path, string fileName, string environmentName = null, bool addUserSecrets = false)
         {
             var builder = new ConfigurationBuilder()

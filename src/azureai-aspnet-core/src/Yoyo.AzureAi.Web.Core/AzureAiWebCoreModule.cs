@@ -14,6 +14,7 @@ using Yoyo.AzureAi.Configuration;
 using Yoyo.AzureAi.EntityFrameworkCore;
 using Abp.Configuration.Startup;
 using Newtonsoft.Json;
+using Abp.AutoMapper;
 
 namespace Yoyo.AzureAi
 {
@@ -27,13 +28,11 @@ namespace Yoyo.AzureAi
     {
         private readonly IHostingEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
-        private readonly IConfigurationRoot _azureConfiguration;
 
         public AzureAiWebCoreModule(IHostingEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();
-            _azureConfiguration = env.GetAzureConfiguration();
         }
 
         public override void PreInitialize()
@@ -54,11 +53,12 @@ namespace Yoyo.AzureAi
                  );
 
             ConfigureTokenAuth();
+
+            ConfigureAzure();
         }
 
         private void ConfigureTokenAuth()
         {
-            #region TokenAuthConfiguration
 
             IocManager.Register<TokenAuthConfiguration>();
             var tokenAuthConfig = IocManager.Resolve<TokenAuthConfiguration>();
@@ -69,15 +69,23 @@ namespace Yoyo.AzureAi
             tokenAuthConfig.SigningCredentials = new SigningCredentials(tokenAuthConfig.SecurityKey, SecurityAlgorithms.HmacSha256);
             tokenAuthConfig.Expiration = TimeSpan.FromDays(1);
 
-            #endregion
+        }
 
-
-            #region AzureConfiguration
-
+        private void ConfigureAzure()
+        {
+            // 注入,然后实例化
             IocManager.Register<AzureConfigs>();
             var azureConfigs = IocManager.Resolve<AzureConfigs>();
-            azureConfigs = JsonConvert.DeserializeObject<AzureConfigs>(_azureConfiguration["AzureCognitiveServices"].ToString());
-            #endregion
+
+            // 读取配置文件并反序列化
+            var auzreSettingsContent = _env.GetJsonFileContent("azuresettings");
+            var tmpAzureConfigs = JsonConvert.DeserializeObject<AzureConfigs>(auzreSettingsContent);
+
+            // 将临时配置对象中的引用给Ioc实例化对象
+            azureConfigs.ComputerVisionOCR = tmpAzureConfigs.ComputerVisionOCR;
+            azureConfigs.ComputerVisionImgAnalyze = tmpAzureConfigs.ComputerVisionImgAnalyze;
+            azureConfigs.SpeechToText = tmpAzureConfigs.SpeechToText;
+            azureConfigs.TextToSpeech = tmpAzureConfigs.TextToSpeech;
         }
 
         public override void Initialize()

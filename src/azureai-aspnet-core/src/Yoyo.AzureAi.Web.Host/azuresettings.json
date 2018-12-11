@@ -1,26 +1,24 @@
 {
-  "AzureCognitiveServices": {
-    "ComputerVisionOCR": { // OCR
-      "ApiKey": "",
-      "Endpoint": ""
-    },
-    "ComputerVisionImgAnalyze": { // Í¼Æ¬³¡¾°·ÖÎö
-      "ApiKey": "",
-      "Endpoint": ""
-    },
-    "SpeechToText": { // ÓïÒô×ªÎÄ±¾
-      "ApiKey": "",
-      "Endpoint": "",
-      "Region": "",
-      "Host": ""
-    },
-    "TextToSpeech": { // ÎÄ±¾×ªÓïÒô
-      "ApiKey": "",
-      "Endpoint": "",
-      "Region": "",
-      "Host": "",
-      "ResouceName": "",
-      "ContentTemplate": "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{0}'><voice name='Microsoft Server Speech Text to Speech Voice ({1})'>{2}</voice></speak>"
-    }
+  "ComputerVisionOCR": { // OCR
+    "ApiKey": "",
+    "Endpoint": "https://eastasia.api.cognitive.microsoft.com/vision/v2.0/ocr"
+  },
+  "ComputerVisionImgAnalyze": { // å›¾ç‰‡åœºæ™¯åˆ†æ
+    "ApiKey": "",
+    "Endpoint": ""
+  },
+  "SpeechToText": { // è¯­éŸ³è½¬æ–‡æœ¬
+    "ApiKey": "",
+    "Endpoint": "",
+    "Region": "",
+    "Host": ""
+  },
+  "TextToSpeech": { // æ–‡æœ¬è½¬è¯­éŸ³
+    "ApiKey": "",
+    "Endpoint": "",
+    "Region": "",
+    "Host": "",
+    "ResouceName": "",
+    "ContentTemplate": "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{0}'><voice name='Microsoft Server Speech Text to Speech Voice ({1})'>{2}</voice></speak>"
   }
 }
