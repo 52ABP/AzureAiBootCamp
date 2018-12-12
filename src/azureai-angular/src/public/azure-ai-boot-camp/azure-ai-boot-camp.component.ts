@@ -1,5 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/component-base';
+import { HttpClient } from '@angular/common/http';
+import { AzureServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-azure-ai-boot-camp',
@@ -10,26 +12,37 @@ import { AppComponentBase } from '@shared/component-base';
 })
 export class AzureAiBootCampComponent extends AppComponentBase
   implements OnInit {
-  ocrImgUrl: string;
 
-  ocrLoding: boolean = false;
+  isLoding: boolean;
+  langs = {
+    ocr: [],
+    speechToText: [],
+    textToSpeech: [],
+    textToSpeechChildren: []
+  }
+
 
   constructor(
     injector: Injector,
+    private httpClient: HttpClient,
+    private _azureService: AzureServiceProxy,
   ) {
     super(injector);
+
   }
   ngOnInit() {
-    this.ocrImgUrl = "https://leizhangstorage.blob.core.chinacloudapi.cn/azureblog/ocr.jpg";
-  }
-  ocrAnalyze() {
-    this.ocrLoding = true;
-    const self = this;
+    this.isLoding = true;
+    this.httpClient.get("/assets/azureLang.json")
+      .finally(() => {
+        this.isLoding = false;
+      })
+      .subscribe((result) => {
+        let res = <any>result;
+        this.langs.ocr = res.ocr;
+        this.langs.speechToText = res.speechToText;
+        this.langs.textToSpeech = res.textToSpeech;
 
-    setTimeout(() => {
-      self.ocrLoding = false;
-    }, 3000);
-
+      });
   }
 
 

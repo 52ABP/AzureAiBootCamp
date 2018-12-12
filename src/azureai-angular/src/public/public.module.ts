@@ -11,10 +11,12 @@ import { AbpModule } from 'yoyo-ng-module/src/abp';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
+import { AzureOcrComponent } from './azure-ai-boot-camp/components/azure-ocr/azure-ocr.component';
 
 const COMPONENTS = [
   LayoutComponent,
-  AzureAiBootCampComponent
+  AzureAiBootCampComponent,
+  AzureOcrComponent
 ]
 
 
@@ -30,7 +32,7 @@ const COMPONENTS = [
     ServiceProxyModule,
     PublicRoutingModule,
   ],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS,],
   entryComponents: [
 
   ],

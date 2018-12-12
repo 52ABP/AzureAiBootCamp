@@ -1,0 +1,50 @@
+<div nz-row nzGutter="8">
+  <div nz-col nzSpan="12">
+    <nz-card nzHoverable style="width:100%" [nzCover]="coverTemplate">
+      <nz-card-meta [nzTitle]="ocrTitle" [nzDescription]="ocrInputContent">
+        <ng-template #ocrTitle>
+          <h2>图像光学字符识别 (OCR)</h2>
+        </ng-template>
+        <ng-template #ocrInputContent>
+          <div nz-row nzGutter="4">
+            <label nz-col nzSpan="4" class="mg-top5">图片Url地址:</label>
+            <div nz-col nzSpan="20">
+              <input nz-input [(ngModel)]="requestParms.imgUrl" placeholder="请输入图片url" [disabled]="isLoding">
+            </div>
+          </div>
+
+          <div nz-row nzGutter="4" class="mg-top5">
+            <label nz-col nzSpan="4" class="mg-top5">语&nbsp;言&nbsp;选&nbsp;择:</label>
+            <div nz-col nzSpan="8">
+              <nz-select style="width:100%;" [(ngModel)]="requestParms.lang" nzShowSearch [nzDisabled]="isLoding">
+                <nz-option *ngFor="let item of _langs" [nzLabel]="item.label" [nzValue]="item.value">
+                </nz-option>
+              </nz-select>
+            </div>
+            <button (click)="ocrAnalyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!requestParms.imgUrl||!requestParms.lang">立即识别</button>
+          </div>
+
+        </ng-template>
+      </nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+      <img [src]="requestParms.imgUrl" />
+    </ng-template>
+  </div>
+
+  <div nz-col nzSpan="12">
+    <nz-spin [nzTip]="'加载中...'" [nzSpinning]="isLoding">
+      <nz-card>
+        <nz-tabset>
+          <nz-tab nzTitle="预览">
+            <textarea nz-input [(ngModel)]="result" [nzAutosize]="{ minRows: 26, maxRows: 26 }"></textarea>
+          </nz-tab>
+          <!-- <nz-tab nzTitle="实际返回结果">
+            <textarea nz-input [nzAutosize]="{ minRows: 26, maxRows: 26 }"></textarea>
+          </nz-tab> -->
+        </nz-tabset>
+      </nz-card>
+    </nz-spin>
+
+  </div>
+</div>

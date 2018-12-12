@@ -1,35 +1,6 @@
-<div nz-row nzGutter="8">
-  <div nz-col nzSpan="12">
-    <nz-card nzHoverable style="width:100%" [nzCover]="coverTemplate">
-      <nz-card-meta [nzTitle]="ocrTitle" [nzDescription]="ocrInputContent">
-        <ng-template #ocrTitle>
-          <h2>图像光学字符识别 (OCR)</h2>
-          <h4>图片url地址:</h4>
-        </ng-template>
-        <ng-template #ocrInputContent>
-          <input nz-input [(ngModel)]="ocrImgUrl" placeholder="请输入图片url">
-          <button (click)="ocrAnalyze()" nz-button>立即识别</button>
-        </ng-template>
-      </nz-card-meta>
-    </nz-card>
-    <ng-template #coverTemplate>
-      <img [src]="ocrImgUrl" />
-    </ng-template>
-  </div>
+<nz-spin [nzTip]="'初始化语言数据...'" [nzSpinning]="isLoding">
 
-  <div nz-col nzSpan="12">
-    <nz-spin [nzTip]="'加载中...'" [nzSpinning]="ocrLoding">
-      <nz-card>
-        <nz-tabset>
-          <nz-tab nzTitle="预览">
-            <textarea nz-input [nzAutosize]="{ minRows: 27, maxRows: 27 }"></textarea>
-          </nz-tab>
-          <nz-tab nzTitle="实际返回结果">
-            <textarea nz-input [nzAutosize]="{ minRows: 27, maxRows: 27 }"></textarea>
-          </nz-tab>
-        </nz-tabset>
-      </nz-card>
-    </nz-spin>
+  <!-- OCR -->
+  <app-azure-ocr [langs]="langs.ocr"></app-azure-ocr>
 
-  </div>
-</div>
+</nz-spin>

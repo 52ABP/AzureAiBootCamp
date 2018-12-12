@@ -1,0 +1,854 @@
+{
+    "ocr": [
+        {
+            "label": "自动检测(AutoDetect)",
+            "value": "unk"
+        },
+        {
+            "label": "中文简体",
+            "value": "zh-Hans"
+        },
+        {
+            "label": "中文繁体",
+            "value": "zh-Hant"
+        },
+        {
+            "label": "Czech",
+            "value": "cs"
+        },
+        {
+            "label": "Danish",
+            "value": "da"
+        },
+        {
+            "label": "Dutch",
+            "value": "nl"
+        },
+        {
+            "label": "English",
+            "value": "en"
+        },
+        {
+            "label": "Finnish",
+            "value": "fi"
+        },
+        {
+            "label": "French",
+            "value": "fr"
+        },
+        {
+            "label": "German",
+            "value": "de"
+        },
+        {
+            "label": "Greek",
+            "value": "el"
+        },
+        {
+            "label": "Hungarian",
+            "value": "hu"
+        },
+        {
+            "label": "Italian",
+            "value": "it"
+        },
+        {
+            "label": "Japanese",
+            "value": "ja"
+        },
+        {
+            "label": "Korean",
+            "value": "ko"
+        },
+        {
+            "label": "Norwegian",
+            "value": "nb"
+        },
+        {
+            "label": "Polish",
+            "value": "pl"
+        },
+        {
+            "label": "Portuguese",
+            "value": "pt"
+        },
+        {
+            "label": "Russian",
+            "value": "ru"
+        },
+        {
+            "label": "Spanish",
+            "value": "es"
+        },
+        {
+            "label": "Swedish",
+            "value": "sv"
+        },
+        {
+            "label": "Turkish",
+            "value": "tr"
+        },
+        {
+            "label": "Arabic",
+            "value": "ar"
+        },
+        {
+            "label": "Romanian",
+            "value": "ro"
+        },
+        {
+            "label": "SerbianCyrillic",
+            "value": "sr-Cyrl"
+        },
+        {
+            "label": "SerbianLatin",
+            "value": "sr-Latn"
+        },
+        {
+            "label": "Slovak",
+            "value": "sk"
+        }
+    ],
+    "speechToText": [
+        {
+            "label": "阿拉伯语(埃及),现代标准",
+            "value": "ar-EG"
+        },
+        {
+            "label": "加泰罗尼亚语(西班牙)",
+            "value": "ca-ES"
+        },
+        {
+            "label": "丹麦语(丹麦)",
+            "value": "da-DK"
+        },
+        {
+            "label": "德语(德国)",
+            "value": "de-DE"
+        },
+        {
+            "label": "英语(澳大利亚)",
+            "value": "en-AU"
+        },
+        {
+            "label": "英语(加拿大)",
+            "value": "en-CA"
+        },
+        {
+            "label": "英语(英国)",
+            "value": "en-GB"
+        },
+        {
+            "label": "英语(印度)",
+            "value": "en-IN"
+        },
+        {
+            "label": "英语(新西兰)",
+            "value": "en-NZ"
+        },
+        {
+            "label": "英语(美国)",
+            "value": "en-US"
+        },
+        {
+            "label": "西班牙语(西班牙)",
+            "value": "es-ES"
+        },
+        {
+            "label": "西班牙语(墨西哥)",
+            "value": "es-MX"
+        },
+        {
+            "label": "芬兰语(芬兰)",
+            "value": "fi-FI"
+        },
+        {
+            "label": "法语(加拿大)",
+            "value": "fr-CA"
+        },
+        {
+            "label": "法语(法国)",
+            "value": "fr-FR"
+        },
+        {
+            "label": "印地语(印度)",
+            "value": "hi-IN"
+        },
+        {
+            "label": "意大利语(意大利)",
+            "value": "it-IT"
+        },
+        {
+            "label": "日语(日本)",
+            "value": "ja-JP"
+        },
+        {
+            "label": "韩语(韩国)",
+            "value": "ko-KR"
+        },
+        {
+            "label": "书面挪威语(挪威)",
+            "value": "nb-NO"
+        },
+        {
+            "label": "荷兰语(荷兰)",
+            "value": "nl-NL"
+        },
+        {
+            "label": "波兰语(波兰)",
+            "value": "pl-PL"
+        },
+        {
+            "label": "葡萄牙语(巴西)",
+            "value": "pt-BR"
+        },
+        {
+            "label": "葡萄牙语(葡萄牙)",
+            "value": "pt-PT"
+        },
+        {
+            "label": "俄语(俄罗斯)",
+            "value": "ru-RU"
+        },
+        {
+            "label": "瑞典语(瑞典)",
+            "value": "sv-SE"
+        },
+        {
+            "label": "中文(普通话,简体)",
+            "value": "zh-CN"
+        },
+        {
+            "label": "中文(普通话,繁体)",
+            "value": "zh-HK"
+        },
+        {
+            "label": "中文(台湾普通话)",
+            "value": "zh-TW"
+        },
+        {
+            "label": "泰语(泰国)",
+            "value": "th-TH"
+        }
+    ],
+    "textToSpeech": [
+        {
+            "label": "阿拉伯语(埃及)",
+            "value": "ar-EG*",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(ar-EG, Hoda)"
+                }
+            ]
+        },
+        {
+            "label": "阿拉伯语(沙特阿拉伯)",
+            "value": "ar-SA",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(ar-SA, Naayf)"
+                }
+            ]
+        },
+        {
+            "label": "保加利亚语",
+            "value": "bg-BG",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(bg-BG, Ivan)"
+                }
+            ]
+        },
+        {
+            "label": "加泰罗尼亚语(西班牙)",
+            "value": "ca-ES",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(ca-ES, HerenaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "捷克语",
+            "value": "cs-CZ",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(cs-CZ, Jakub)"
+                }
+            ]
+        },
+        {
+            "label": "丹麦语",
+            "value": "da-DK",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(da-DK, HelleRUS)"
+                }
+            ]
+        },
+        {
+            "label": "德语(奥地利)",
+            "value": "de-AT",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(de-AT, Michael)"
+                }
+            ]
+        },
+        {
+            "label": "德语(瑞士)",
+            "value": "de-CH",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(de-CH, Karsten)"
+                }
+            ]
+        },
+        {
+            "label": "德语(德国)",
+            "value": "de-DE",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(de-DE, Hedda)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(de-DE, HeddaRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(de-DE, Stefan, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "希腊语",
+            "value": "el-GR",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(el-GR, Stefanos)"
+                }
+            ]
+        },
+        {
+            "label": "英语(澳大利亚)",
+            "value": "en-AU",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(en-AU, Catherine)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(en-AU, HayleyRUS)"
+                }
+            ]
+        },
+        {
+            "label": "英语(加拿大)",
+            "value": "en-CA",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(en-CA, Linda)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(en-CA, HeatherRUS)"
+                }
+            ]
+        },
+        {
+            "label": "英语(英国)",
+            "value": "en-GB",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(en-GB, Susan, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(en-GB, HazelRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(en-GB, George, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "英语(爱尔兰)",
+            "value": "en-IE",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(en-IE, Sean)"
+                }
+            ]
+        },
+        {
+            "label": "英语(印度)",
+            "value": "en-IN",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(en-IN, Heera, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(en-IN, PriyaRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(en-IN, Ravi, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "英语(美国)",
+            "value": "en-US",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(en-US, ZiraRUS)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(en-US, JessaRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(en-US, BenjaminRUS)"
+                },
+                {
+                    "label": "女-4",
+                    "value": "(en-US, Jessa24kRUS)"
+                },
+                {
+                    "label": "男-5",
+                    "value": "(en-US, Guy24kRUS)"
+                }
+            ]
+        },
+        {
+            "label": "西班牙语(西班牙)",
+            "value": "es-ES",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(es-ES, Laura, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(es-ES, HelenaRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(es-ES, Pablo, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "西班牙语(墨西哥)",
+            "value": "es-MX",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(es-MX, HildaRUS)"
+                },
+                {
+                    "label": "男-2",
+                    "value": "(es-MX, Raul, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "芬兰语",
+            "value": "fi-FI",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(fi-FI, HeidiRUS)"
+                }
+            ]
+        },
+        {
+            "label": "法语(加拿大)",
+            "value": "fr-CA",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(fr-CA, Caroline)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(fr-CA, HarmonieRUS)"
+                }
+            ]
+        },
+        {
+            "label": "法语(瑞士)",
+            "value": "fr-CH",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(fr-CH, Guillaume)"
+                }
+            ]
+        },
+        {
+            "label": "法语(法国)",
+            "value": "fr-FR",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(fr-FR, Julie, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(fr-FR, HortenseRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(fr-FR, Paul, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "希伯来语(以色列)",
+            "value": "he-IL",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(he-IL, Asaf)"
+                }
+            ]
+        },
+        {
+            "label": "印地语(印度)",
+            "value": "hi-IN",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(hi-IN, Kalpana, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(hi-IN, Kalpana)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(hi-IN, Hemant)"
+                }
+            ]
+        },
+        {
+            "label": "克罗地亚语",
+            "value": "hr-HR",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(hr-HR, Matej)"
+                }
+            ]
+        },
+        {
+            "label": "匈牙利语",
+            "value": "hu-HU",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(hu-HU, Szabolcs)"
+                }
+            ]
+        },
+        {
+            "label": "印度尼西亚语",
+            "value": "id-ID",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(id-ID, Andika)"
+                }
+            ]
+        },
+        {
+            "label": "意大利语",
+            "value": "it-IT",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(it-IT, Cosimo, Apoll)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(it-IT, LuciaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "日语",
+            "value": "ja-JP",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(ja-JP, Ayumi, Apollo)"
+                },
+                {
+                    "label": "男-2",
+                    "value": "(ja-JP, Ichiro, Apollo)"
+                },
+                {
+                    "label": "女-3",
+                    "value": "(ja-JP, HarukaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "韩语",
+            "value": "ko-KR",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(ko-KR, HeamiRUS)"
+                }
+            ]
+        },
+        {
+            "label": "马来语",
+            "value": "ms-MY",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(ms-MY, Rizwan)"
+                }
+            ]
+        },
+        {
+            "label": "挪威语",
+            "value": "nb-NO",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(nb-NO, HuldaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "荷兰语",
+            "value": "nl-NL",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(nl-NL, HannaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "波兰语",
+            "value": "pl-PL",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(pl-PL, PaulinaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "葡萄牙语(巴西)",
+            "value": "pt-BR",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(pt-BR, HeloisaRUS)"
+                },
+                {
+                    "label": "男-2",
+                    "value": "(pt-BR, Daniel, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "葡萄牙语(葡萄牙)",
+            "value": "pt-PT",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(pt-PT, HeliaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "罗马尼亚语",
+            "value": "ro-RO",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(ro-RO, Andrei)"
+                }
+            ]
+        },
+        {
+            "label": "俄语",
+            "value": "ru-RU",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(ru-RU, Irina, Apollo)"
+                },
+                {
+                    "label": "男-2",
+                    "value": "(ru-RU, Pavel, Apollo)"
+                },
+                {
+                    "label": "女-3",
+                    "value": "(ru-RU, EkaterinaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "斯洛伐克语",
+            "value": "sk-SK",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(sk-SK, Filip)"
+                }
+            ]
+        },
+        {
+            "label": "斯洛文尼亚语",
+            "value": "sl-SI",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(sl-SI, Lado)"
+                }
+            ]
+        },
+        {
+            "label": "瑞典语",
+            "value": "sv-SE",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(sv-SE, HedvigRUS)"
+                }
+            ]
+        },
+        {
+            "label": "泰米尔语(印度)",
+            "value": "ta-IN",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(ta-IN, Valluvar)"
+                }
+            ]
+        },
+        {
+            "label": "泰卢固语(印度)",
+            "value": "te-IN",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(te-IN, Chitra)"
+                }
+            ]
+        },
+        {
+            "label": "泰语",
+            "value": "th-TH",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(th-TH, Pattara)"
+                }
+            ]
+        },
+        {
+            "label": "土耳其语",
+            "value": "tr-TR",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(tr-TR, SedaRUS)"
+                }
+            ]
+        },
+        {
+            "label": "越南语",
+            "value": "vi-VN",
+            "children": [
+                {
+                    "label": "男-1",
+                    "value": "(vi-VN, An)"
+                }
+            ]
+        },
+        {
+            "label": "中文(中国大陆)",
+            "value": "zh-CN",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(zh-CN, HuihuiRUS)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(zh-CN, Yaoyao, Apollo)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(zh-CN, Kangkang, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "中文(香港特别行政区)",
+            "value": "zh-HK",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(zh-HK, Tracy, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(zh-HK, TracyRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(zh-HK, Danny, Apollo)"
+                }
+            ]
+        },
+        {
+            "label": "中文(中国台湾)",
+            "value": "zh-TW",
+            "children": [
+                {
+                    "label": "女-1",
+                    "value": "(zh-TW, Yating, Apollo)"
+                },
+                {
+                    "label": "女-2",
+                    "value": "(zh-TW, HanHanRUS)"
+                },
+                {
+                    "label": "男-3",
+                    "value": "(zh-TW, Zhiwei, Apollo)"
+                }
+            ]
+        }
+    ]
+}
