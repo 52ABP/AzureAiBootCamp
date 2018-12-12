@@ -45,10 +45,10 @@ export class AzureOcrComponent extends AppComponentBase
   /**
  * ocr分析
  */
-  ocrAnalyze() {
+  analyze() {
     this.isLoding = true;
     this.result = null;
-    this._azureService.ocr(this.requestParms.imgUrl, this.requestParms.lang)
+    this._azureService.imgOcr(this.requestParms.imgUrl, this.requestParms.lang)
       .finally(() => {
         this.isLoding = false;
       })

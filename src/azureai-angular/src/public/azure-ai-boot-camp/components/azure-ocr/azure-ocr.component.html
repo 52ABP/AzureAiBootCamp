@@ -1,6 +1,10 @@
 <div nz-row nzGutter="8">
   <div nz-col nzSpan="12">
     <nz-card nzHoverable style="width:100%" [nzCover]="coverTemplate">
+      <ng-template #coverTemplate>
+        <img [src]="requestParms.imgUrl" />
+      </ng-template>
+
       <nz-card-meta [nzTitle]="ocrTitle" [nzDescription]="ocrInputContent">
         <ng-template #ocrTitle>
           <h2>图像光学字符识别 (OCR)</h2>
@@ -21,15 +25,13 @@
                 </nz-option>
               </nz-select>
             </div>
-            <button (click)="ocrAnalyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!requestParms.imgUrl||!requestParms.lang">立即识别</button>
+            <button (click)="analyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!requestParms.imgUrl||!requestParms.lang">立即识别</button>
           </div>
 
         </ng-template>
       </nz-card-meta>
     </nz-card>
-    <ng-template #coverTemplate>
-      <img [src]="requestParms.imgUrl" />
-    </ng-template>
+
   </div>
 
   <div nz-col nzSpan="12">

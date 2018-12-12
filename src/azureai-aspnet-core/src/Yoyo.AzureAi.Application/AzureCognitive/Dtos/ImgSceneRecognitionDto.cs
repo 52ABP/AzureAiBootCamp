@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,6 +22,10 @@ namespace Yoyo.AzureAi.AzureCognitive.Dtos
         public List<ImgSceneRecognitionTagDto> ImgTags { get; set; }
 
 
+        /// <summary>
+        /// 人脸
+        /// </summary>
+        public List<FaceDescription> Faces { get; set; }
     }
 
     /// <summary>

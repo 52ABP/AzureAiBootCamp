@@ -7,7 +7,7 @@ using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Yoyo.AzureAi.AzureCognitive;
 using Yoyo.AzureAi.AzureCognitive.Dtos;
 using Yoyo.AzureAi.Controllers;
-
+using Yoyo.AzureAi.Net.MimeTypes;
 
 namespace Yoyo.AzureAi.Web.Host.Controllers
 {
@@ -21,39 +21,62 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
         }
 
         /// <summary>
-        /// 图片Ocr
+        /// 图片场景分析
         /// </summary>
         /// <param name="imgUrl">图片链接</param>
-        /// <param name="language">语言</param>
+        /// <returns>分析结果Dto</returns>
+        [HttpPost]
+        public async Task<ImgSceneRecognitionDto> ImgSceneRecognition(ImgSceneRecognitionInput input)
+        {
+            var analyzeResult = await _azureCognitiveManager.ImgAnalyze(input.ImgUrl);
+
+
+            // 主色彩
+            //analyzeResult.Color.DominantColors
+
+            // 是否黑白照
+            // analyzeResult.Color.IsBWImg
+
+
+            var result = new ImgSceneRecognitionDto()
+            {
+                Captions = GetCaptions(analyzeResult),
+                ImgTags = GetImgTag(analyzeResult),
+                Faces = analyzeResult.Faces?.ToList()// 图片中的人脸和相关信息
+            };
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 图片Ocr
+        /// </summary>
+        /// <param name="input">输入</param>
         /// <returns>ocr识别结果</returns>
         [HttpPost]
-        public async Task<string> ImgOcr(string imgUrl, string language)
+        public async Task<string> ImgOcr(ImgOcrInput input)
         {
-            var result = await _azureCognitiveManager.ImgOcrSimpleFormattedText(imgUrl, language);
+            var result = await _azureCognitiveManager.ImgOcrSimpleFormattedText(input.ImgUrl, input.Lang);
 
             return result;
 
         }
 
         /// <summary>
-        /// 图片场景分析
+        /// 文字转语音
         /// </summary>
-        /// <param name="imgUrl">图片链接</param>
-        /// <returns>分析结果Dto</returns>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ImgSceneRecognitionDto> ImgSceneRecognition(string imgUrl)
+        public async Task<FileContentResult> TextToSpeech(TextToSpeechInput input)
         {
-            var analyzeResult = await _azureCognitiveManager.ImgAnalyze(imgUrl);
+            var result = await _azureCognitiveManager.TextToSpeech(input.Text, input.Lang, input.Voice);
 
-            var result = new ImgSceneRecognitionDto()
-            {
-                Captions = GetCaptions(analyzeResult),
-                ImgTags = GetImgTag(analyzeResult)
-            };
+            Response.Body.Dispose();
 
-            return result;
+            return File(result.ToArray(), MimeTypeNames.AudioWav);
         }
-
 
 
 
@@ -100,7 +123,7 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
             }
 
             return result;
-        } 
+        }
 
         #endregion
     }

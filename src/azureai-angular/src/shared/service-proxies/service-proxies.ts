@@ -152,16 +152,14 @@ export class AzureServiceProxy {
     }
 
     /**
-     * @param imgUrl (optional) 
-     * @param language (optional) 
      * @return Success
      */
-    ocr(imgUrl: string | null | undefined, language: string | null | undefined): Observable<string> {
-        let url_ = this.baseUrl + "/api/Azure/Ocr?";
-        if (imgUrl !== undefined)
-            url_ += "imgUrl=" + encodeURIComponent("" + imgUrl) + "&"; 
-        if (language !== undefined)
-            url_ += "language=" + encodeURIComponent("" + language) + "&"; 
+    imgSceneRecognition(imgUrl: string): Observable<ImgSceneRecognitionDto> {
+        let url_ = this.baseUrl + "/api/Azure/ImgSceneRecognition?";
+        if (imgUrl === undefined || imgUrl === null)
+            throw new Error("The parameter 'imgUrl' must be defined and cannot be null.");
+        else
+            url_ += "ImgUrl=" + encodeURIComponent("" + imgUrl) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -173,11 +171,70 @@ export class AzureServiceProxy {
         };
 
         return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processOcr(response_);
+            return this.processImgSceneRecognition(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processOcr(<any>response_);
+                    return this.processImgSceneRecognition(<any>response_);
+                } catch (e) {
+                    return <Observable<ImgSceneRecognitionDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ImgSceneRecognitionDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processImgSceneRecognition(response: HttpResponseBase): Observable<ImgSceneRecognitionDto> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ImgSceneRecognitionDto.fromJS(resultData200) : new ImgSceneRecognitionDto();
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ImgSceneRecognitionDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    imgOcr(imgUrl: string, lang: string): Observable<string> {
+        let url_ = this.baseUrl + "/api/Azure/ImgOcr?";
+        if (imgUrl === undefined || imgUrl === null)
+            throw new Error("The parameter 'imgUrl' must be defined and cannot be null.");
+        else
+            url_ += "ImgUrl=" + encodeURIComponent("" + imgUrl) + "&"; 
+        if (lang === undefined || lang === null)
+            throw new Error("The parameter 'lang' must be defined and cannot be null.");
+        else
+            url_ += "Lang=" + encodeURIComponent("" + lang) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processImgOcr(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processImgOcr(<any>response_);
                 } catch (e) {
                     return <Observable<string>><any>_observableThrow(e);
                 }
@@ -186,7 +243,7 @@ export class AzureServiceProxy {
         }));
     }
 
-    protected processOcr(response: HttpResponseBase): Observable<string> {
+    protected processImgOcr(response: HttpResponseBase): Observable<string> {
         const status = response.status;
         const responseBlob = 
             response instanceof HttpResponse ? response.body : 
@@ -206,6 +263,65 @@ export class AzureServiceProxy {
             }));
         }
         return _observableOf<string>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    textToSpeech(text: string, lang: string, voice: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/Azure/TextToSpeech?";
+        if (text === undefined || text === null)
+            throw new Error("The parameter 'text' must be defined and cannot be null.");
+        else
+            url_ += "Text=" + encodeURIComponent("" + text) + "&"; 
+        if (lang === undefined || lang === null)
+            throw new Error("The parameter 'lang' must be defined and cannot be null.");
+        else
+            url_ += "Lang=" + encodeURIComponent("" + lang) + "&"; 
+        if (voice === undefined || voice === null)
+            throw new Error("The parameter 'voice' must be defined and cannot be null.");
+        else
+            url_ += "Voice=" + encodeURIComponent("" + voice) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processTextToSpeech(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processTextToSpeech(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processTextToSpeech(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
     }
 }
 
@@ -1936,6 +2052,238 @@ export interface IRegisterOutput {
     canLogin: boolean | undefined;
 }
 
+export class ImgSceneRecognitionDto implements IImgSceneRecognitionDto {
+    captions: string[] | undefined;
+    imgTags: ImgSceneRecognitionTagDto[] | undefined;
+    faces: FaceDescription[] | undefined;
+
+    constructor(data?: IImgSceneRecognitionDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["captions"] && data["captions"].constructor === Array) {
+                this.captions = [];
+                for (let item of data["captions"])
+                    this.captions.push(item);
+            }
+            if (data["imgTags"] && data["imgTags"].constructor === Array) {
+                this.imgTags = [];
+                for (let item of data["imgTags"])
+                    this.imgTags.push(ImgSceneRecognitionTagDto.fromJS(item));
+            }
+            if (data["faces"] && data["faces"].constructor === Array) {
+                this.faces = [];
+                for (let item of data["faces"])
+                    this.faces.push(FaceDescription.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ImgSceneRecognitionDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ImgSceneRecognitionDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.captions && this.captions.constructor === Array) {
+            data["captions"] = [];
+            for (let item of this.captions)
+                data["captions"].push(item);
+        }
+        if (this.imgTags && this.imgTags.constructor === Array) {
+            data["imgTags"] = [];
+            for (let item of this.imgTags)
+                data["imgTags"].push(item.toJSON());
+        }
+        if (this.faces && this.faces.constructor === Array) {
+            data["faces"] = [];
+            for (let item of this.faces)
+                data["faces"].push(item.toJSON());
+        }
+        return data; 
+    }
+
+    clone(): ImgSceneRecognitionDto {
+        const json = this.toJSON();
+        let result = new ImgSceneRecognitionDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IImgSceneRecognitionDto {
+    captions: string[] | undefined;
+    imgTags: ImgSceneRecognitionTagDto[] | undefined;
+    faces: FaceDescription[] | undefined;
+}
+
+export class ImgSceneRecognitionTagDto implements IImgSceneRecognitionTagDto {
+    tagName: string | undefined;
+    percentage: number | undefined;
+    percentageStr: string | undefined;
+
+    constructor(data?: IImgSceneRecognitionTagDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.tagName = data["tagName"];
+            this.percentage = data["percentage"];
+            this.percentageStr = data["percentageStr"];
+        }
+    }
+
+    static fromJS(data: any): ImgSceneRecognitionTagDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ImgSceneRecognitionTagDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["tagName"] = this.tagName;
+        data["percentage"] = this.percentage;
+        data["percentageStr"] = this.percentageStr;
+        return data; 
+    }
+
+    clone(): ImgSceneRecognitionTagDto {
+        const json = this.toJSON();
+        let result = new ImgSceneRecognitionTagDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IImgSceneRecognitionTagDto {
+    tagName: string | undefined;
+    percentage: number | undefined;
+    percentageStr: string | undefined;
+}
+
+export class FaceDescription implements IFaceDescription {
+    age: number | undefined;
+    gender: FaceDescriptionGender | undefined;
+    faceRectangle: FaceRectangle | undefined;
+
+    constructor(data?: IFaceDescription) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.age = data["age"];
+            this.gender = data["gender"];
+            this.faceRectangle = data["faceRectangle"] ? FaceRectangle.fromJS(data["faceRectangle"]) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): FaceDescription {
+        data = typeof data === 'object' ? data : {};
+        let result = new FaceDescription();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["age"] = this.age;
+        data["gender"] = this.gender;
+        data["faceRectangle"] = this.faceRectangle ? this.faceRectangle.toJSON() : <any>undefined;
+        return data; 
+    }
+
+    clone(): FaceDescription {
+        const json = this.toJSON();
+        let result = new FaceDescription();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFaceDescription {
+    age: number | undefined;
+    gender: FaceDescriptionGender | undefined;
+    faceRectangle: FaceRectangle | undefined;
+}
+
+export class FaceRectangle implements IFaceRectangle {
+    left: number | undefined;
+    top: number | undefined;
+    width: number | undefined;
+    height: number | undefined;
+
+    constructor(data?: IFaceRectangle) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.left = data["left"];
+            this.top = data["top"];
+            this.width = data["width"];
+            this.height = data["height"];
+        }
+    }
+
+    static fromJS(data: any): FaceRectangle {
+        data = typeof data === 'object' ? data : {};
+        let result = new FaceRectangle();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["left"] = this.left;
+        data["top"] = this.top;
+        data["width"] = this.width;
+        data["height"] = this.height;
+        return data; 
+    }
+
+    clone(): FaceRectangle {
+        const json = this.toJSON();
+        let result = new FaceRectangle();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IFaceRectangle {
+    left: number | undefined;
+    top: number | undefined;
+    width: number | undefined;
+    height: number | undefined;
+}
+
 export class ChangeUiThemeInput implements IChangeUiThemeInput {
     theme: string;
 
@@ -3257,6 +3605,11 @@ export enum IsTenantAvailableOutputState {
     _1 = 1, 
     _2 = 2, 
     _3 = 3, 
+}
+
+export enum FaceDescriptionGender {
+    Male = <any>"Male", 
+    Female = <any>"Female", 
 }
 
 export class SwaggerException extends Error {

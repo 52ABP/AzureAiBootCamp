@@ -307,5 +307,8 @@ namespace Yoyo.AzureAi.Net.MimeTypes
 
         ///<summary>ZIP archive files; Registered[7]</summary>
         public const string ApplicationZip = "application/zip";
+
+        ///<summary>wav open media format</summary>
+        public const string AudioWav = "audio/wav";
     }
 }
