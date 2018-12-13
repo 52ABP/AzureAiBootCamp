@@ -24,7 +24,9 @@
 
   <div nz-col nzSpan="19">
     <label>转换结果：</label>
-    <textarea nz-input [(ngModel)]="resultText" [nzAutosize]="{ minRows: 24, maxRows: 24 }" [disabled]="isLoding"
-      readonly></textarea>
+    <nz-spin [nzTip]="'转换中...'" [nzSpinning]="isLoding">
+      <textarea nz-input [(ngModel)]="resultText" [nzAutosize]="{ minRows: 24, maxRows: 24 }" [disabled]="isLoding"
+        readonly></textarea>
+    </nz-spin>
   </div>
 </div>

@@ -78,6 +78,7 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
         {
             try
             {
+                input.Text = input.Text.Replace("\n", string.Empty);
                 var result = await _azureCognitiveManager.TextToSpeech(input.Text, input.Lang, input.Voice);
 
                 return File(result, MimeTypeNames.ApplicationZip);

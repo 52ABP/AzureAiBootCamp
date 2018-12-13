@@ -90,6 +90,7 @@ export class AzureTextToSpeechComponent extends AppComponentBase
           FileDownloadHelper.responseDownloadFile(response, timestamp + ".wav");
         },
         (error) => {
+          debugger
           this.message.error(error);
         });
   }
