@@ -89,6 +89,27 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
         }
 
 
+        /// <summary>
+        /// 语音转文字
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [DisableAuditing]
+        public async Task<string> SpeechToText(string lang)
+        {
+            var profilePictureFile = Request.Form.Files.First();
+
+            using (var stream = profilePictureFile.OpenReadStream())
+            {
+                var result = await _azureCognitiveManager.SpeechToText(stream, lang);
+
+                return result;
+            }
+
+        }
+
+
 
 
 

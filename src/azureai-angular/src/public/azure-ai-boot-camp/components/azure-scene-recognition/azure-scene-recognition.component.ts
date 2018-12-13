@@ -15,7 +15,6 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
   @ViewChild("imgContainer") imgContainer: ElementRef;
   isLoding: boolean;
 
-  // OCR识别使用的属性
   requestParms: ImgSceneRecognitionInput = new ImgSceneRecognitionInput();
   entityDto: ImgSceneRecognitionDto;
 

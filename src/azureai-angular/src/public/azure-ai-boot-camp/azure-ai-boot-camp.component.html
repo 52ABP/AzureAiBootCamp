@@ -1,12 +1,24 @@
 <nz-spin [nzTip]="'初始化语言数据...'" [nzSpinning]="isLoding">
 
-  <!-- 图片场景识别 -->
-  <app-azure-scene-recognition></app-azure-scene-recognition>
+  <nz-card>
+    <nz-tabset>
+      <nz-tab nzTitle="图片场景识别">
+        <app-azure-scene-recognition></app-azure-scene-recognition>
+      </nz-tab>
 
-  <!-- OCR -->
-  <app-azure-ocr [langs]="langs.ocr"></app-azure-ocr>
+      <nz-tab nzTitle="图片光学字符识别(OCR)">
+        <app-azure-ocr [langs]="langs.ocr"></app-azure-ocr>
+      </nz-tab>
 
-  <!-- 文本转语音 -->
-  <app-azure-text-to-speech [langs]="langs.textToSpeech"></app-azure-text-to-speech>
+      <nz-tab nzTitle="文本转语音">
+        <app-azure-text-to-speech [langs]="langs.textToSpeech"></app-azure-text-to-speech>
+      </nz-tab>
+
+      <nz-tab nzTitle="语音转文本">
+        <app-azure-speech-to-text [langs]="langs.textToSpeech"></app-azure-speech-to-text>
+      </nz-tab>
+
+    </nz-tabset>
+  </nz-card>
 
 </nz-spin>

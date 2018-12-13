@@ -14,6 +14,7 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { AzureOcrComponent } from './azure-ai-boot-camp/components/azure-ocr/azure-ocr.component';
 import { AzureSceneRecognitionComponent } from './azure-ai-boot-camp/components/azure-scene-recognition/azure-scene-recognition.component';
 import { AzureTextToSpeechComponent } from './azure-ai-boot-camp/components/azure-text-to-speech/azure-text-to-speech.component';
+import { AzureSpeechToTextComponent } from './azure-ai-boot-camp/components/azure-speech-to-text/azure-speech-to-text.component';
 
 const COMPONENTS = [
   LayoutComponent,
@@ -38,6 +39,7 @@ const COMPONENTS = [
   ],
   declarations: [
     ...COMPONENTS,
+    AzureSpeechToTextComponent,
   ],
   entryComponents: [
 

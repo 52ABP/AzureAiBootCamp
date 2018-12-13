@@ -1,0 +1,30 @@
+<div nz-row nzGutter="8" class="container">
+  <div nz-col nzSpan="5">
+    <div>
+      <label class="mg-top5">选择语言：</label>
+      <nz-select [(ngModel)]="selectedLang" style="width:60%;" nzShowSearch [nzDisabled]="isLoding">
+        <nz-option *ngFor="let item of _langs" [nzLabel]="item.label" [nzValue]="item.value" customc>
+        </nz-option>
+      </nz-select>
+    </div>
+    <br>
+    <div>
+      <label class="mg-top5">选择文件：</label>
+      <nz-upload style="width:70%;" [nzAction]="uploadUrl" [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload"
+        [nzRemove]="removeFile" [nzDisabled]="isLoding">
+        <button nz-button>
+          <i nz-icon type="upload"></i>
+          <span>选择音频文件</span>
+        </button>
+      </nz-upload>
+    </div>
+    <br>
+    <button nzSpan="2" (click)="analyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!enableUpload()">立即转换</button>
+  </div>
+
+  <div nz-col nzSpan="19">
+    <label>转换结果：</label>
+    <textarea nz-input [(ngModel)]="resultText" [nzAutosize]="{ minRows: 24, maxRows: 24 }" [disabled]="isLoding"
+      readonly></textarea>
+  </div>
+</div>

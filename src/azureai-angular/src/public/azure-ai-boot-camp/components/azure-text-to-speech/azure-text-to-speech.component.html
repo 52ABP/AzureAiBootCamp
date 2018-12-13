@@ -1,10 +1,8 @@
-<nz-card nzTitle="文本转语音">
-
-
+<div class="container">
   <div nz-row nzGutter="8">
     <div nz-col nzSpan="8">
       <label class="mg-top5">选择语言：</label>
-      <nz-select [(ngModel)]="this.requestParms.lang" style="width:75%;" nzShowSearch (ngModelChange)="langChanged($event)"
+      <nz-select [(ngModel)]="requestParms.lang" style="width:75%;" nzShowSearch (ngModelChange)="langChanged($event)"
         [nzDisabled]="isLoding">
         <nz-option *ngFor="let item of _langs" [nzLabel]="item.label" [nzValue]="item.value">
         </nz-option>
@@ -13,7 +11,7 @@
 
     <div nz-col nzSpan="8">
       <label class="mg-top5">选择发音人：</label>
-      <nz-select [(ngModel)]="this.requestParms.voice" style="width:70%;" nzShowSearch [nzDisabled]="isLoding">
+      <nz-select [(ngModel)]="requestParms.voice" style="width:70%;" nzShowSearch [nzDisabled]="isLoding">
         <nz-option *ngFor="let item of voices" [nzLabel]="item.label" [nzValue]="item.value">
         </nz-option>
       </nz-select>
@@ -25,10 +23,7 @@
   <br>
 
   <div nz-row nzGutter="8">
-    <textarea nz-input [(ngModel)]="this.requestParms.text" [nzAutosize]="{ minRows: 24, maxRows: 24 }" placeholder="请输入文本"
+    <textarea nz-input [(ngModel)]="requestParms.text" [nzAutosize]="{ minRows: 24, maxRows: 24 }" placeholder="请输入文本"
       [disabled]="isLoding"></textarea>
   </div>
-
-
-
-</nz-card>
+</div>

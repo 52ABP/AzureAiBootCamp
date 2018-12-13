@@ -19,7 +19,6 @@ export class AzureTextToSpeechComponent extends AppComponentBase
 
   isLoding: boolean;
 
-  // OCR识别使用的属性
   requestParms: TextToSpeechInput = new TextToSpeechInput();
 
   // 语言
@@ -84,11 +83,15 @@ export class AzureTextToSpeechComponent extends AppComponentBase
       .finally(() => {
         this.isLoding = false;
       })
-      .subscribe((response) => {
-        // 将响应下载到文件
-        let timestamp = (new Date()).valueOf();
-        FileDownloadHelper.responseDownloadFile(response, timestamp + ".wav");
-      });
+      .subscribe(
+        (response) => {
+          // 将响应下载到文件
+          let timestamp = (new Date()).valueOf();
+          FileDownloadHelper.responseDownloadFile(response, timestamp + ".wav");
+        },
+        (error) => {
+          this.message.error(error);
+        });
   }
 
 
