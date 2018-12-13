@@ -1,24 +1,22 @@
 {
   "ComputerVisionOCR": { // OCR
-    "ApiKey": "",
-    "Endpoint": "https://eastasia.api.cognitive.microsoft.com/vision/v2.0/ocr"
+    "ApiKey": "", // azure订阅 key
+    "Endpoint": "https://eastasia.api.cognitive.microsoft.com/vision/v2.0/ocr" // api url
   },
   "ComputerVisionImgAnalyze": { // 图片场景分析
-    "ApiKey": "",
-    "Endpoint": ""
+    "ApiKey": "", // azure订阅 key
+    "Endpoint": "https://eastasia.api.cognitive.microsoft.com" // api url
   },
   "SpeechToText": { // 语音转文本
-    "ApiKey": "",
-    "Endpoint": "",
-    "Region": "",
-    "Host": ""
+    "ApiKey": "", // azure订阅 key
+    "Region": "eastasia" // 资源位置(例如：eastasia)
   },
   "TextToSpeech": { // 文本转语音
-    "ApiKey": "",
-    "Endpoint": "",
-    "Region": "",
-    "Host": "",
-    "ResouceName": "",
-    "ContentTemplate": "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{0}'><voice name='Microsoft Server Speech Text to Speech Voice ({1})'>{2}</voice></speak>"
+    "ApiKey": "", // azure订阅 key
+    "Endpoint": "https://eastasia.api.cognitive.microsoft.com/sts/v1.0/issuetoken", // 获取token的api url
+    "Region": "eastasia", // 资源位置(例如：eastasia)
+    "Host": "https://eastasia.tts.speech.microsoft.com/cognitiveservices/v1", // 文本转语音服务的api url
+    "ResouceName": "ai-azure-2018", // 在azure中的资源名称
+    "ContentTemplate": "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='{0}'><voice name='Microsoft Server Speech Text to Speech Voice {1}'>{2}</voice></speak>" // 语音模板
   }
 }
