@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector, Input } from '@angular/core';
 import { AppComponentBase } from '@shared/component-base';
-import { AzureServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AzureServiceProxy, ImgOcrInput } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-azure-ocr',
@@ -24,10 +24,7 @@ export class AzureOcrComponent extends AppComponentBase
   isLoding: boolean;
 
   // OCR识别使用的属性
-  requestParms = {
-    imgUrl: "https://leizhangstorage.blob.core.chinacloudapi.cn/azureblog/ocr.jpg",
-    lang: null
-  }
+  requestParms: ImgOcrInput = new ImgOcrInput();
   result: string;
 
 
@@ -36,10 +33,9 @@ export class AzureOcrComponent extends AppComponentBase
     private _azureService: AzureServiceProxy,
   ) {
     super(injector);
-
   }
   ngOnInit() {
-
+    this.requestParms.imgUrl = "https://blog.staneee.com/0001.jpg";
   }
 
   /**
@@ -48,7 +44,7 @@ export class AzureOcrComponent extends AppComponentBase
   analyze() {
     this.isLoding = true;
     this.result = null;
-    this._azureService.imgOcr(this.requestParms.imgUrl, this.requestParms.lang)
+    this._azureService.imgOcr(this.requestParms)
       .finally(() => {
         this.isLoding = false;
       })

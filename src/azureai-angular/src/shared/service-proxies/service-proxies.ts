@@ -152,20 +152,21 @@ export class AzureServiceProxy {
     }
 
     /**
+     * @param input (optional) 
      * @return Success
      */
-    imgSceneRecognition(imgUrl: string): Observable<ImgSceneRecognitionDto> {
-        let url_ = this.baseUrl + "/api/Azure/ImgSceneRecognition?";
-        if (imgUrl === undefined || imgUrl === null)
-            throw new Error("The parameter 'imgUrl' must be defined and cannot be null.");
-        else
-            url_ += "ImgUrl=" + encodeURIComponent("" + imgUrl) + "&"; 
+    imgSceneRecognition(input: ImgSceneRecognitionInput | null | undefined): Observable<ImgSceneRecognitionDto> {
+        let url_ = this.baseUrl + "/api/Azure/ImgSceneRecognition";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(input);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             })
         };
@@ -207,24 +208,21 @@ export class AzureServiceProxy {
     }
 
     /**
+     * @param input (optional) 
      * @return Success
      */
-    imgOcr(imgUrl: string, lang: string): Observable<string> {
-        let url_ = this.baseUrl + "/api/Azure/ImgOcr?";
-        if (imgUrl === undefined || imgUrl === null)
-            throw new Error("The parameter 'imgUrl' must be defined and cannot be null.");
-        else
-            url_ += "ImgUrl=" + encodeURIComponent("" + imgUrl) + "&"; 
-        if (lang === undefined || lang === null)
-            throw new Error("The parameter 'lang' must be defined and cannot be null.");
-        else
-            url_ += "Lang=" + encodeURIComponent("" + lang) + "&"; 
+    imgOcr(input: ImgOcrInput | null | undefined): Observable<string> {
+        let url_ = this.baseUrl + "/api/Azure/ImgOcr";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(input);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json", 
                 "Accept": "application/json"
             })
         };
@@ -266,28 +264,21 @@ export class AzureServiceProxy {
     }
 
     /**
+     * @param input (optional) 
      * @return Success
      */
-    textToSpeech(text: string, lang: string, voice: string): Observable<void> {
-        let url_ = this.baseUrl + "/api/Azure/TextToSpeech?";
-        if (text === undefined || text === null)
-            throw new Error("The parameter 'text' must be defined and cannot be null.");
-        else
-            url_ += "Text=" + encodeURIComponent("" + text) + "&"; 
-        if (lang === undefined || lang === null)
-            throw new Error("The parameter 'lang' must be defined and cannot be null.");
-        else
-            url_ += "Lang=" + encodeURIComponent("" + lang) + "&"; 
-        if (voice === undefined || voice === null)
-            throw new Error("The parameter 'voice' must be defined and cannot be null.");
-        else
-            url_ += "Voice=" + encodeURIComponent("" + voice) + "&"; 
+    textToSpeech(input: TextToSpeechInput | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/Azure/TextToSpeech";
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(input);
+
         let options_ : any = {
+            body: content_,
             observe: "response",
             responseType: "blob",
             headers: new HttpHeaders({
+                "Content-Type": "application/json", 
             })
         };
 
@@ -2052,6 +2043,49 @@ export interface IRegisterOutput {
     canLogin: boolean | undefined;
 }
 
+export class ImgSceneRecognitionInput implements IImgSceneRecognitionInput {
+    imgUrl: string;
+
+    constructor(data?: IImgSceneRecognitionInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.imgUrl = data["imgUrl"];
+        }
+    }
+
+    static fromJS(data: any): ImgSceneRecognitionInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new ImgSceneRecognitionInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["imgUrl"] = this.imgUrl;
+        return data; 
+    }
+
+    clone(): ImgSceneRecognitionInput {
+        const json = this.toJSON();
+        let result = new ImgSceneRecognitionInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IImgSceneRecognitionInput {
+    imgUrl: string;
+}
+
 export class ImgSceneRecognitionDto implements IImgSceneRecognitionDto {
     captions: string[] | undefined;
     imgTags: ImgSceneRecognitionTagDto[] | undefined;
@@ -2282,6 +2316,104 @@ export interface IFaceRectangle {
     top: number | undefined;
     width: number | undefined;
     height: number | undefined;
+}
+
+export class ImgOcrInput implements IImgOcrInput {
+    imgUrl: string;
+    lang: string;
+
+    constructor(data?: IImgOcrInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.imgUrl = data["imgUrl"];
+            this.lang = data["lang"];
+        }
+    }
+
+    static fromJS(data: any): ImgOcrInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new ImgOcrInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["imgUrl"] = this.imgUrl;
+        data["lang"] = this.lang;
+        return data; 
+    }
+
+    clone(): ImgOcrInput {
+        const json = this.toJSON();
+        let result = new ImgOcrInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IImgOcrInput {
+    imgUrl: string;
+    lang: string;
+}
+
+export class TextToSpeechInput implements ITextToSpeechInput {
+    text: string;
+    lang: string;
+    voice: string;
+
+    constructor(data?: ITextToSpeechInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.text = data["text"];
+            this.lang = data["lang"];
+            this.voice = data["voice"];
+        }
+    }
+
+    static fromJS(data: any): TextToSpeechInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new TextToSpeechInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["text"] = this.text;
+        data["lang"] = this.lang;
+        data["voice"] = this.voice;
+        return data; 
+    }
+
+    clone(): TextToSpeechInput {
+        const json = this.toJSON();
+        let result = new TextToSpeechInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ITextToSpeechInput {
+    text: string;
+    lang: string;
+    voice: string;
 }
 
 export class ChangeUiThemeInput implements IChangeUiThemeInput {

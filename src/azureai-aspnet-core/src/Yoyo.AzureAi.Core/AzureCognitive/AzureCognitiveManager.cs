@@ -234,7 +234,7 @@ namespace Yoyo.AzureAi.AzureCognitive
         /// <param name="lang">语言</param>
         /// <param name="voice">说话人</param>
         /// <returns>音频流</returns>
-        public async Task<MemoryStream> TextToSpeech(string text, string lang, string voice)
+        public async Task<byte[]> TextToSpeech(string text, string lang, string voice)
         {
             var accessToken = string.Empty;
             try
@@ -276,16 +276,22 @@ namespace Yoyo.AzureAi.AzureCognitive
                     // 输出音频
                     request.Headers.Add("X-Microsoft-OutputFormat", "riff-16khz-16bit-mono-pcm");
                     // 创建请求
-                    Console.WriteLine("正在调用Azure TTS 服务,请稍后.. \n");
-                    using (var response = await client.SendAsync(request))
+                    using (var response = await client.SendAsync(request).ConfigureAwait(false))
                     {
                         response.EnsureSuccessStatusCode();
                         // 异步读取响应
                         using (var dataStream = await response.Content.ReadAsStreamAsync())
                         {
-                            var stream = new MemoryStream();
-                            await dataStream.CopyToAsync(stream);
-                            return stream;
+                            byte[] buffer = new byte[dataStream.Length];
+
+                            //StreamContent a = new StreamContent(dataStream);
+                            dataStream.Read(buffer, 0, buffer.Length);
+
+
+                            return buffer;
+                            //var stream = new MemoryStream();
+                            //await dataStream.CopyToAsync(stream);
+                            //return dataStream;
                         }
                     }
                 }

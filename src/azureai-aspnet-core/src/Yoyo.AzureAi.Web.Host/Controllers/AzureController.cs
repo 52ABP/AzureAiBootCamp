@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Auditing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Yoyo.AzureAi.AzureCognitive;
@@ -26,7 +28,8 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
         /// <param name="imgUrl">图片链接</param>
         /// <returns>分析结果Dto</returns>
         [HttpPost]
-        public async Task<ImgSceneRecognitionDto> ImgSceneRecognition(ImgSceneRecognitionInput input)
+        [DisableAuditing]
+        public async Task<ImgSceneRecognitionDto> ImgSceneRecognition([FromBody]ImgSceneRecognitionInput input)
         {
             var analyzeResult = await _azureCognitiveManager.ImgAnalyze(input.ImgUrl);
 
@@ -55,7 +58,8 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
         /// <param name="input">输入</param>
         /// <returns>ocr识别结果</returns>
         [HttpPost]
-        public async Task<string> ImgOcr(ImgOcrInput input)
+        [DisableAuditing]
+        public async Task<string> ImgOcr([FromBody]ImgOcrInput input)
         {
             var result = await _azureCognitiveManager.ImgOcrSimpleFormattedText(input.ImgUrl, input.Lang);
 
@@ -69,13 +73,19 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<FileContentResult> TextToSpeech(TextToSpeechInput input)
+        [DisableAuditing]
+        public async Task<FileContentResult> TextToSpeech([FromBody]TextToSpeechInput input)
         {
-            var result = await _azureCognitiveManager.TextToSpeech(input.Text, input.Lang, input.Voice);
+            try
+            {
+                var result = await _azureCognitiveManager.TextToSpeech(input.Text, input.Lang, input.Voice);
 
-            Response.Body.Dispose();
-
-            return File(result.ToArray(), MimeTypeNames.AudioWav);
+                return File(result, MimeTypeNames.ApplicationZip);
+            }
+            finally
+            {
+                Response.Body.Dispose();
+            }
         }
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { AppComponentBase } from '@shared/component-base';
-import { AzureServiceProxy, ImgSceneRecognitionDto, FaceDescriptionGender } from '@shared/service-proxies/service-proxies';
+import { AzureServiceProxy, ImgSceneRecognitionDto, FaceDescriptionGender, ImgSceneRecognitionInput } from '@shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-azure-scene-recognition',
@@ -16,9 +16,7 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
   isLoding: boolean;
 
   // OCR识别使用的属性
-  requestParms = {
-    imgUrl: "http://p0.qhimgs4.com/t01a2465a4f6a5b70c1.jpg",
-  }
+  requestParms: ImgSceneRecognitionInput = new ImgSceneRecognitionInput();
   entityDto: ImgSceneRecognitionDto;
 
   faces: any[] = [];
@@ -34,7 +32,7 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
 
   }
   ngOnInit() {
-
+    this.requestParms.imgUrl = "http://p0.qhimgs4.com/t01a2465a4f6a5b70c1.jpg";
   }
 
   /**
@@ -46,7 +44,7 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
     this.result = '';
     this.faceRectangleClear();
 
-    this._azureService.imgSceneRecognition(this.requestParms.imgUrl)
+    this._azureService.imgSceneRecognition(this.requestParms)
       .finally(() => {
         this.isLoding = false;
       })

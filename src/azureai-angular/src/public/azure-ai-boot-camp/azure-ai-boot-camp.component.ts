@@ -18,7 +18,6 @@ export class AzureAiBootCampComponent extends AppComponentBase
     ocr: [],
     speechToText: [],
     textToSpeech: [],
-    textToSpeechChildren: []
   }
 
 

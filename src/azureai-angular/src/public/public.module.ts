@@ -13,12 +13,14 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { AzureOcrComponent } from './azure-ai-boot-camp/components/azure-ocr/azure-ocr.component';
 import { AzureSceneRecognitionComponent } from './azure-ai-boot-camp/components/azure-scene-recognition/azure-scene-recognition.component';
+import { AzureTextToSpeechComponent } from './azure-ai-boot-camp/components/azure-text-to-speech/azure-text-to-speech.component';
 
 const COMPONENTS = [
   LayoutComponent,
   AzureAiBootCampComponent,
   AzureSceneRecognitionComponent,
-  AzureOcrComponent
+  AzureOcrComponent,
+  AzureTextToSpeechComponent
 ]
 
 

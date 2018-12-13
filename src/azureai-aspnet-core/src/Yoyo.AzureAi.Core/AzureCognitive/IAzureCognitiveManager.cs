@@ -71,6 +71,6 @@ namespace Yoyo.AzureAi.AzureCognitive
         /// <param name="lang">语言</param>
         /// <param name="voice">说话人</param>
         /// <returns>音频流</returns>
-        Task<MemoryStream> TextToSpeech(string text, string lang, string voice);
+        Task<byte[]> TextToSpeech(string text, string lang, string voice);
     }
 }
