@@ -1,54 +1,34 @@
-<div nz-row nzGutter="8">
-  <div nz-col nzSpan="12">
-    <nz-spin [nzTip]="'加载中...'" [nzSpinning]="isLoding">
-      <nz-card>
-        <nz-tabset>
-          <nz-tab nzTitle="文本输入">
-            <textarea nz-input [(ngModel)]="this.requestParms.text" [nzAutosize]="{ minRows: 24, maxRows: 24 }"></textarea>
-          </nz-tab>
+<nz-card nzTitle="文本转语音">
 
-        </nz-tabset>
-      </nz-card>
-    </nz-spin>
+
+  <div nz-row nzGutter="8">
+    <div nz-col nzSpan="8">
+      <label class="mg-top5">选择语言：</label>
+      <nz-select [(ngModel)]="this.requestParms.lang" style="width:75%;" nzShowSearch (ngModelChange)="langChanged($event)"
+        [nzDisabled]="isLoding">
+        <nz-option *ngFor="let item of _langs" [nzLabel]="item.label" [nzValue]="item.value">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <label class="mg-top5">选择发音人：</label>
+      <nz-select [(ngModel)]="this.requestParms.voice" style="width:70%;" nzShowSearch [nzDisabled]="isLoding">
+        <nz-option *ngFor="let item of voices" [nzLabel]="item.label" [nzValue]="item.value">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <button nzSpan="2" (click)="analyze()" nz-button [nzLoading]="isLoding">立即转换</button>
   </div>
 
+  <br>
 
-  <div nz-col nzSpan="12">
-    <nz-card nzHoverable style="width:100%">
-
-      <div nz-row nzGutter="8">
-        <div nz-col nzSpan="5" class="mg-top5">
-          选择语言
-        </div>
-        <div nz-col nzSpan="8">
-          <nz-select [(ngModel)]="this.requestParms.lang" style="width:100%;" nzShowSearch (ngModelChange)="langChanged($event)">
-            <nz-option *ngFor="let item of _langs" [nzLabel]="item.label" [nzValue]="item.value">
-            </nz-option>
-          </nz-select>
-
-        </div>
-      </div>
-      <br>
-      <div nz-row nzGutter="8">
-        <div nz-col nzSpan="5" class="mg-top5">
-          选择发音人
-        </div>
-        <div nz-col nzSpan="8">
-          <nz-select [(ngModel)]="this.requestParms.voice" style="width:100%;" nzShowSearch>
-            <nz-option *ngFor="let item of voices" [nzLabel]="item.label" [nzValue]="item.value">
-            </nz-option>
-          </nz-select>
-
-        </div>
-      </div>
-      <p>
-        <button (click)="analyze()" nz-button>立即转换</button>
-      </p>
-      <p>Card content</p>
-    </nz-card>
-
+  <div nz-row nzGutter="8">
+    <textarea nz-input [(ngModel)]="this.requestParms.text" [nzAutosize]="{ minRows: 24, maxRows: 24 }" placeholder="请输入文本"
+      [disabled]="isLoding"></textarea>
   </div>
 
 
 
-</div>
+</nz-card>
