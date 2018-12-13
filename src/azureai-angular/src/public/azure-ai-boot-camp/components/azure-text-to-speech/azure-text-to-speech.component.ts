@@ -15,8 +15,7 @@ import { FileDownloadHelper } from '@shared/helpers/FileDownloadHelper';
 })
 export class AzureTextToSpeechComponent extends AppComponentBase
   implements OnInit {
-  @ViewChild("imgContainer")
-  imgContainer: ElementRef;
+
 
   isLoding: boolean;
 
@@ -42,7 +41,6 @@ export class AzureTextToSpeechComponent extends AppComponentBase
   constructor(
     injector: Injector,
     private httpClient: HttpClient,
-    private renderer: Renderer2,
     private _azureService: AzureServiceProxy,
   ) {
     super(injector);
@@ -57,13 +55,23 @@ export class AzureTextToSpeechComponent extends AppComponentBase
   */
   analyze() {
     this.isLoding = true;
+
+    // 这里的内容从这个函数里面剥离出来
+    //this._azureService.textToSpeech
+
+
+    // 请求地址
     let baseUrl = AppConsts.remoteServiceBaseUrl;
     let url_ = baseUrl + "/api/Azure/TextToSpeech";
 
+    // 请求携带内容
     const content_ = JSON.stringify(this.requestParms);
+
+    // 组织请求头
     let tokenHeader = TokenHelper.createRequestHeaders();
     tokenHeader = tokenHeader.set("Content-Type", "application/json");
-    debugger
+
+    // 请求参数
     let options_: any = {
       body: content_,
       observe: "response",
@@ -71,7 +79,7 @@ export class AzureTextToSpeechComponent extends AppComponentBase
       headers: tokenHeader
     };
 
-
+    // 创建请求
     this.httpClient.request("post", url_, options_)
       .finally(() => {
         this.isLoding = false;
