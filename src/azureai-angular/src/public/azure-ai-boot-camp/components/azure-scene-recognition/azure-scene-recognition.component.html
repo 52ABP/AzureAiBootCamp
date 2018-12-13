@@ -3,7 +3,7 @@
     <nz-card nzHoverable style="width:100%" [nzCover]="coverTemplate">
       <ng-template #coverTemplate>
         <div #imgContainer>
-          <img [src]="requestParms.imgUrl" />
+          <img #img [src]="requestParms.imgUrl" />
         </div>
       </ng-template>
 
@@ -19,6 +19,7 @@
             </div>
           </div>
 
+          <br>
           <button (click)="analyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!requestParms.imgUrl">立即识别</button>
 
         </ng-template>

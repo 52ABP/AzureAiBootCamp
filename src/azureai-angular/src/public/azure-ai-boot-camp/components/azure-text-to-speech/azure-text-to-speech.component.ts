@@ -111,4 +111,11 @@ export class AzureTextToSpeechComponent extends AppComponentBase
 
   }
 
+  /**
+   * 启用识别按钮
+   */
+  enabled(): boolean {
+    return this.requestParms.text && this.requestParms.text.length > 0;
+  }
+
 }

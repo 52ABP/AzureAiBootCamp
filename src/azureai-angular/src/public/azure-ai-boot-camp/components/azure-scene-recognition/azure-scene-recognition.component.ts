@@ -13,6 +13,8 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
   implements OnInit {
 
   @ViewChild("imgContainer") imgContainer: ElementRef;
+  @ViewChild("img") img: ElementRef;
+
   isLoding: boolean;
 
   requestParms: ImgSceneRecognitionInput = new ImgSceneRecognitionInput();
@@ -31,13 +33,14 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
 
   }
   ngOnInit() {
-    this.requestParms.imgUrl = "http://p0.qhimgs4.com/t01a2465a4f6a5b70c1.jpg";
+    this.requestParms.imgUrl = "http://n.sinaimg.cn/sinacn15/329/w640h489/20181114/fa10-hnvukfe8865615.jpg";
   }
 
   /**
   * 
   */
   analyze() {
+
     this.isLoding = true;
     this.entityDto = null;
     this.result = '';
@@ -67,6 +70,9 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
 
         this.result += JSON.stringify(result.faces);
 
+
+
+
       })
   }
 
@@ -82,10 +88,25 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
   }
 
   /**
-   * 创建面部勾勒框（有问题,因为图片比例导致生成的位置不对，需要再计算，此处留为优化点）
+   * 创建面部勾勒框
    * @param input 
    */
   faceRectangleCreate(input: ImgSceneRecognitionDto) {
+
+    // 页面图片的宽高
+    let pageImgWidth: number = this.img.nativeElement.offsetWidth;
+    let pageImgHeight: number = this.img.nativeElement.offsetHeight;
+
+    // 图片真实宽高
+    let imgWidth: number = input.width;
+    let imgHeight: number = input.height;
+
+    // 页面和图片的宽高比例补偿
+    let wp = pageImgWidth / imgWidth;
+    let hp = pageImgHeight / imgHeight;
+
+
+
     // 添加面部勾勒框
     if (input.faces && input.faces.length > 0) {
 
@@ -103,10 +124,10 @@ export class AzureSceneRecognitionComponent extends AppComponentBase
 
         // 组织dom
         var faceDiv = this.renderer.createElement("div");
-        this.renderer.setStyle(faceDiv, "width", item.faceRectangle.width + "px");
-        this.renderer.setStyle(faceDiv, "height", item.faceRectangle.height + "px");
-        this.renderer.setStyle(faceDiv, "top", item.faceRectangle.top + "px");
-        this.renderer.setStyle(faceDiv, "left", item.faceRectangle.left + "px");
+        this.renderer.setStyle(faceDiv, "width", (item.faceRectangle.width * wp) + "px");
+        this.renderer.setStyle(faceDiv, "height", (item.faceRectangle.height * hp) + "px");
+        this.renderer.setStyle(faceDiv, "left", (item.faceRectangle.left * wp) + "px");
+        this.renderer.setStyle(faceDiv, "top", (item.faceRectangle.top * hp) + "px");
         this.renderer.setStyle(faceDiv, "position", "absolute");
         this.renderer.setStyle(faceDiv, "border", "solid 3px " + color);
         // 添加到记录数组

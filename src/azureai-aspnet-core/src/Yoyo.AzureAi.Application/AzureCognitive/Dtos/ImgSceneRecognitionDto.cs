@@ -26,6 +26,17 @@ namespace Yoyo.AzureAi.AzureCognitive.Dtos
         /// 人脸
         /// </summary>
         public List<FaceDescription> Faces { get; set; }
+
+
+        /// <summary>
+        /// 宽度
+        /// </summary>
+        public int Width { get; set; }
+
+        /// <summary>
+        /// 高度
+        /// </summary>
+        public int Height { get; set; }
     }
 
     /// <summary>

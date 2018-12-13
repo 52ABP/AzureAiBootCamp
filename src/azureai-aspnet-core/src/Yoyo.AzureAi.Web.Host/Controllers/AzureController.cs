@@ -45,7 +45,9 @@ namespace Yoyo.AzureAi.Web.Host.Controllers
             {
                 Captions = GetCaptions(analyzeResult),
                 ImgTags = GetImgTag(analyzeResult),
-                Faces = analyzeResult.Faces?.ToList()// 图片中的人脸和相关信息
+                Faces = analyzeResult.Faces?.ToList(),// 图片中的人脸和相关信息
+                Height = analyzeResult.Metadata.Height,
+                Width = analyzeResult.Metadata.Width
             };
 
             return result;

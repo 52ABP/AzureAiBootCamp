@@ -17,7 +17,7 @@
       </nz-select>
     </div>
 
-    <button nzSpan="2" (click)="analyze()" nz-button nzType="primary" [nzLoading]="isLoding">立即转换</button>
+    <button nzSpan="2" (click)="analyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!enabled()">立即转换</button>
   </div>
 
   <br>
