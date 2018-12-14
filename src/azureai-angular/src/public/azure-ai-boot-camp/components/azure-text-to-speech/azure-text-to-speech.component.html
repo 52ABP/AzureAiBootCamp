@@ -24,6 +24,9 @@
 
   <div nz-row nzGutter="8">
     <textarea nz-input [(ngModel)]="requestParms.text" [nzAutosize]="{ minRows: 24, maxRows: 24 }" placeholder="请输入文本"
-      [disabled]="isLoding"></textarea>
+      [disabled]="isLoding" (ngModelChange)="textChanged($event)"></textarea>
+
+    <br>
+    <div>注意:输出音频为wav(PCM),具体参数为 16kmhz,16bit,1channels</div>
   </div>
 </div>

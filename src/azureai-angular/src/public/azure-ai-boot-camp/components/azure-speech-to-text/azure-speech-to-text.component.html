@@ -11,15 +11,22 @@
     <div>
       <label class="mg-top5">选择文件：</label>
       <nz-upload style="width:70%;" [nzAction]="uploadUrl" [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload"
-        [nzRemove]="removeFile" [nzDisabled]="isLoding">
+        [nzRemove]="removeFile" [nzDisabled]="isLoding" nzSize="51200" nzFileType="audio/wav">
         <button nz-button>
           <i nz-icon type="upload"></i>
           <span>选择音频文件</span>
         </button>
       </nz-upload>
+
     </div>
     <br>
     <button nzSpan="2" (click)="analyze()" nz-button nzType="primary" [nzLoading]="isLoding" [disabled]="!enableUpload()">立即转换</button>
+
+    <br>
+    <br>
+    <div>注意:对音源的要求为PCM 格式,16000Mhz,16bit,1channels </div>
+    <a href="https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/how-to-use-audio-input-streams"
+      target="_blank">官方文档</a>
   </div>
 
   <div nz-col nzSpan="19">
@@ -28,5 +35,6 @@
       <textarea nz-input [(ngModel)]="resultText" [nzAutosize]="{ minRows: 24, maxRows: 24 }" [disabled]="isLoding"
         readonly></textarea>
     </nz-spin>
+
   </div>
 </div>

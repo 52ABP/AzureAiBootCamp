@@ -115,7 +115,17 @@ export class AzureTextToSpeechComponent extends AppComponentBase
    * 启用识别按钮
    */
   enabled(): boolean {
-    return this.requestParms.text && this.requestParms.text.length > 0;
+    return this.requestParms.text && this.requestParms.text.length > 0 && this.requestParms.text.length <= 800;
+  }
+
+
+  textChanged(val: string) {
+    const self = this;
+    if (val.length > 800) {
+      setTimeout(() => {
+        self.requestParms.text = val.substring(0, 800);
+      }, 10);
+    }
   }
 
 }
