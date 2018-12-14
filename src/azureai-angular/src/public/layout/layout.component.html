@@ -23,19 +23,19 @@
               文档
             </a>
           </li>
-          <li>
+          <li *ngIf="showSourceCode()">
             <a class="item" href="https://github.com/52ABP/AzureAiBootCamp" target="_blank">
               <i class="anticon anticon-github"></i>
               本项目源码
             </a>
           </li>
-          <li>
+          <li *ngIf="showSourceCode()">
             <a class="item" href="https://github.com/52ABP/LTMCompanyNameFree.YoyoCmsTemplate" target="_blank">
               <i class="anticon anticon-github"></i>
               52ABP源码
             </a>
           </li>
-          <li>
+          <li *ngIf="showSourceCode()">
             <a class="item" href="https://github.com/52ABP" target="_blank">
               <i class="anticon anticon-exclamation-circle"></i>
               更多...

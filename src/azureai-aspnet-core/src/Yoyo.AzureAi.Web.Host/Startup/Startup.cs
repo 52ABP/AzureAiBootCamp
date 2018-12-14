@@ -119,13 +119,20 @@ namespace Yoyo.AzureAi.Web.Host.Startup
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();
+
+
+
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "AzureAi API V1");
+#if DEBUG
                 options.IndexStream = () => Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("Yoyo.AzureAi.Web.Host.wwwroot.swagger.ui.index.html");
+                            .GetManifestResourceStream("Yoyo.AzureAi.Web.Host.wwwroot.swagger.ui.index.html"); 
+#endif
             }); // URL: /swagger
+
+
         }
     }
 }

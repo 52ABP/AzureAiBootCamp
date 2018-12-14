@@ -8,6 +8,14 @@ AI训练营的Demo，感谢熊猫提供的DEMO文件，也感谢lulus 帮忙完�
 参考： https://github.com/staneee/AzureCognitiveServicesExample    
 也可以参考当前项目的[操作手册.md](https://github.com/52ABP/AzureAiBootCamp/blob/master/src/%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C.md)    
 
+
+## 注意事项
+
+
+启动丢失依赖请下载c++运行时 [vc_redist.x64.exe](https://download.visualstudio.microsoft.com/download/pr/9fbed7c7-7012-4cc0-a0a3-a541f51981b5/e7eec15278b4473e26d7e32cef53a34c/vc_redist.x64.exe)
+
+
+
 # 课程推荐信息：
 
 # 教程

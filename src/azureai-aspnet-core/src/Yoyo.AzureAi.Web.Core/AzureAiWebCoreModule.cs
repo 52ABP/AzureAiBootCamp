@@ -41,8 +41,11 @@ namespace Yoyo.AzureAi
                 AzureAiConsts.ConnectionStringName
             );
 
+#if DEBUG
             // TODO:将所有错误信息显示到客户端
             Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
+#endif
+
 
             // Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
